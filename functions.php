@@ -10,6 +10,17 @@ function listaPaginas() {
 	return $lista;
 }
 
+function listaPaginasNivel($id_pai) {
+	//Lista páginas do mesmo nível (com mesmo pai)
+	$query = mysql_query("SELECT * FROM paginas WHERE pai = '$id_pai'");
+	
+	while($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
+		$lista[] = $row;
+	}
+	
+	return $lista;
+}
+
 function pegaPagina($id) {
 	$query = mysql_query("SELECT * FROM paginas WHERE id LIKE '$id'");
 	
@@ -18,6 +29,16 @@ function pegaPagina($id) {
 	}
 	
 	return $pagina;
+}
+
+function pegaTitulo($id) {
+	$query = mysql_query("SELECT titulo FROM paginas WHERE id LIKE '$id'");
+	
+	while($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
+		$titulo = $row[titulo];
+	}
+	
+	return $titulo;
 }
 
 function pegaFilhos($id) {
