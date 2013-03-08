@@ -11,6 +11,8 @@ if($custom) {
 	}
 }
 
+echo "<section id=$id>";
 include "templates/$id.php";
+echo "</section>";
 
 ?>
