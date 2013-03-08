@@ -5,8 +5,10 @@ $filhos = pegaFilhos($id);
 $custom = pegaCustom($id);
 $perguntas = pegaPerguntas($id);
 
-foreach($custom as $campo) {
-	$$campo[nome] = $campo[conteudo];
+if($custom) {
+	foreach($custom as $campo) {
+		$$campo[nome] = $campo[conteudo];
+	}
 }
 
 include "templates/$id.php";

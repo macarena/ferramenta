@@ -68,19 +68,21 @@ function pegaPerguntas($id) {
 		$ids[] = $row[pergunta];
 	}
 
-	foreach($ids as $id) {
-		$query = mysql_query("SELECT enunciado, imagem, tipo FROM perguntas WHERE id LIKE '$id'");
+	if($ids) {
+		foreach($ids as $id) {
+			$query = mysql_query("SELECT enunciado, imagem, tipo FROM perguntas WHERE id LIKE '$id'");
 
-		while($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
-			$perguntas[$id[pergunta]] = $row;
+			while($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
+				$perguntas[$id[pergunta]] = $row;
+			}
 		}
+		
+		foreach($perguntas as $id=>$pergunta) {
+			$perguntas[$id]['opcoes'] = pegaRespostasPossiveis($id);
+		}
+		//print_r($perguntas);
+		return $perguntas;
 	}
-	
-	foreach($perguntas as $id=>$pergunta) {
-		$perguntas[$id]['opcoes'] = pegaRespostasPossiveis($id);
-	}
-	//print_r($perguntas);
-	return $perguntas;
 }
 
 function pegaRespostasPossiveis($id) {
